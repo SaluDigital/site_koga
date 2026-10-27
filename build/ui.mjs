@@ -128,7 +128,7 @@ export function toothRowArt(kind, seed = 1) {
     const w = kind === 'before' ? 28 + ((i * 13 + seed) % 10) : 34;
     out += `<rect x="${r1(x - w / 2)}" y="${r1(70 + dy)}" width="${w}" height="60" rx="13" transform="rotate(${r1(rot)} ${x} ${r1(100 + dy)})" fill="#fff" stroke="#0B3340" stroke-width="4"/>`;
   }
-  return `<svg class="ph__art" viewBox="0 0 360 200" aria-hidden="true" focusable="false"><path d="M10 60Q180 40 350 60V160Q180 190 10 160z" fill="${kind === 'before' ? '#7a2a3d' : '#5b1a2e'}"/>${out}</svg>`;
+  return `<svg class="ph__art" viewBox="0 0 360 200" aria-hidden="true" focusable="false"><path d="M10 60Q180 40 350 60V160Q180 190 10 160z" fill="${kind === 'before' ? '#7a2a3d' : '#C8203F'}"/>${out}</svg>`;
 }
 
 /** Six mini mouth diagrams for the "signs" flip cards. */
@@ -142,7 +142,7 @@ export function signArt(id) {
     }
     return s;
   };
-  const mouth = '<rect x="4" y="6" width="112" height="68" rx="24" fill="#5b1a2e"/>';
+  const mouth = '<rect x="4" y="6" width="112" height="68" rx="24" fill="#C8203F"/>';
   const diagrams = {
     spacing: row({ n: 4, x0: 14, y: 14, w: 14, h: 26, gap: 12 }) + row({ n: 4, x0: 14, y: 42, w: 14, h: 24, gap: 12 }),
     crowding: row({ n: 4, x0: 24, y: 14, w: 24, h: 26, gap: -6, rot: 9 }) + row({ n: 4, x0: 24, y: 42, w: 24, h: 24, gap: -6, rot: 9 }),

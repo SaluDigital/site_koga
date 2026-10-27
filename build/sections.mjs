@@ -203,7 +203,10 @@ export function tech(ctx) {
 
     <div class="arc" data-arc>
       <div class="arc__stage">
-        ${smileArcSvg(a.svgLabel)}
+        <div class="arc__imgs">
+          <img class="arc__img arc__img--6" src="${ctx.P}assets/img/6-tooth-smile.webp" width="823" height="489" alt="${esc(a.traditional)}" loading="lazy" decoding="async">
+          <img class="arc__img arc__img--12" src="${ctx.P}assets/img/12-tooth-smile.webp" width="823" height="489" alt="${esc(a.arc)}" loading="lazy" decoding="async">
+        </div>
         <div class="arc__toggle" role="group" aria-label="${esc(a.toggleLabel)}">
           <button type="button" class="chipbtn" data-arc-mode="6" aria-pressed="false">${esc(a.traditional)}</button>
           <button type="button" class="chipbtn" data-arc-mode="12" aria-pressed="true">${esc(a.arc)}</button>
@@ -213,8 +216,8 @@ export function tech(ctx) {
         <h3 class="h3">${esc(a.title)}</h3>
         <p>${esc(a.intro)}</p>
         <div class="arc__figs">
-          <figure>${img(ctx, { file: 'smile-traditional.webp', w: 1000, h: 700, alt: c.alt['smile-traditional'], sizes: '(min-width: 900px) 20vw, 45vw' })}<figcaption>${esc(a.figTraditional)}</figcaption></figure>
-          <figure>${img(ctx, { file: 'smile-arc.webp', w: 1000, h: 700, alt: c.alt['smile-arc'], sizes: '(min-width: 900px) 20vw, 45vw' })}<figcaption>${esc(a.figArc)}</figcaption></figure>
+          <figure>${img(ctx, { file: 'smile-traditional.webp', w: 823, h: 489, alt: c.alt['smile-traditional'], sizes: '(min-width: 900px) 20vw, 45vw' })}<figcaption>${esc(a.figTraditional)}</figcaption></figure>
+          <figure>${img(ctx, { file: 'smile-arc.webp', w: 823, h: 489, alt: c.alt['smile-arc'], sizes: '(min-width: 900px) 20vw, 45vw' })}<figcaption>${esc(a.figArc)}</figcaption></figure>
         </div>
       </div>
     </div>

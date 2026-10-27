@@ -265,6 +265,7 @@
     const fromEvent = (e) => { const r = el.getBoundingClientRect(); set(((e.clientX - r.left) / r.width) * 100); };
     el.addEventListener('pointerdown', (e) => {
       if (e.button > 0) return;
+      e.preventDefault();
       dragging = true;
       el.classList.add('touched');
       try { el.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }

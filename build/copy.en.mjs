@@ -137,7 +137,7 @@ export default {
       title: 'Pitts21: the sliding door',
       intro:
         'Old-style braces hold the wire with tiny elastic ties that create friction. Pitts21 uses a frictionless sliding door, so teeth glide into place.',
-      oldLabel: 'Old braces',
+      oldLabel: 'Before',
       newLabel: 'Pitts21',
       hint: 'Drag the handle to compare',
       sliderLabel: 'Compare old braces and Pitts21 brackets',
