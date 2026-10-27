@@ -1,0 +1,28 @@
+{
+  "name": "Koga Orthodontics",
+  "short_name": "Koga Ortho",
+  "description": "Braces for kids and adults, Spark clear aligners and Pitts21 braces with Dr. Liseane Koga. Four offices in Monroe, West Monroe, Rayville and Columbia, LA.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFBF2",
+  "theme_color": "#0096AC",
+  "icons": [
+    {
+      "src": "assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
