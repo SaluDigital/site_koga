@@ -81,4 +81,4 @@ export const OFFICES = [
   },
 ];
 
-export const GALLERY_COUNT = 6;
+export const GALLERY_COUNT = 10;

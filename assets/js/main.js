@@ -60,7 +60,7 @@
     if (!btn || !m) return;
     const inertTargets = () => ['#main', '.ftr', '.bar'].map((s) => $(s)).filter(Boolean);
     let open = false;
-    const focusables = () => [btn, ...$$('a[href],button', m)].filter((el) => !el.disabled);
+    const focusables = () => $$('a[href],button', m).filter((el) => !el.disabled);
     function set(v) {
       open = v;
       btn.setAttribute('aria-expanded', String(v));
@@ -79,6 +79,7 @@
       }
     }
     btn.addEventListener('click', () => set(!open));
+    $('.menu__close', m).addEventListener('click', () => { set(false); btn.focus(); });
     m.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
     addEventListener('keydown', (e) => {
       if (!open) return;

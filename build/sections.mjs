@@ -20,9 +20,13 @@ export const logo = (ctx, white = false) =>
   `<a class="logo${white ? ' logo--white' : ''}" href="#top"><img src="${ctx.P}assets/img/${white ? 'logo-white' : 'logo'}.webp" width="1024" height="350" alt="${esc(ctx.c.logoLabel)}" decoding="async"></a>`;
 
 /* ------------------------------------------------------------------ */
+const KIDS_URL = 'https://kogaortho.com/kids-orthodontics/';
+const BLOG_URL = 'https://kogaortho.com/blog/';
+const navHref = (k) => (k === 'kids' ? KIDS_URL : k === 'blog' ? BLOG_URL : `#${k}`);
+
 export function header(ctx) {
   const { c } = ctx;
-  const links = Object.entries(c.nav).map(([k, v]) => `<li><a href="#${k === 'smiles' ? 'smiles' : k}" data-nav="${k}">${esc(v)}</a></li>`).join('');
+  const links = Object.entries(c.nav).map(([k, v]) => `<li><a href="${navHref(k)}" data-nav="${k}">${esc(v)}</a></li>`).join('');
   const lang = langSwitch(ctx);
   return `<header class="hdr" id="top">
   <div class="hdr__in wrap">
@@ -30,7 +34,6 @@ export function header(ctx) {
     <nav class="nav" aria-label="${esc(c.navLabel)}"><ul>${links}</ul></nav>
     <div class="hdr__actions">
       ${lang}
-      <a class="btn btn--ghost btn--sm hdr__tel" href="${tel}" aria-label="${esc(c.header.call)}">${icon('phone')}<span>${PHONE.display}</span></a>
       ${book(ctx, c.header.book, 'btn--primary btn--sm hdr__book')}
       <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="${esc(c.menuOpen)}" data-open="${esc(c.menuOpen)}" data-close="${esc(c.menuClose)}"><span></span><span></span><span></span></button>
     </div>
@@ -38,8 +41,9 @@ export function header(ctx) {
   <div class="progress" aria-hidden="true"><i class="progress__fill"></i><span class="progress__marks"></span></div>
 </header>
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="${esc(c.mobileNavLabel)}" hidden>
+  <div class="menu__top">${logo(ctx, true)}<button class="menu__close" type="button" aria-label="${esc(c.menuClose)}"><span></span><span></span></button></div>
   <nav aria-label="${esc(c.mobileNavLabel)}"><ul class="menu__list">${Object.entries(c.nav)
-    .map(([k, v], i) => `<li style="--i:${i}" class="t-${COLORS[i % 4]}"><a href="#${k}"><small>0${i + 1}</small>${esc(v)}</a></li>`)
+    .map(([k, v], i) => `<li style="--i:${i}" class="t-${COLORS[i % 4]}"><a href="${navHref(k)}"><small>0${i + 1}</small>${esc(v)}</a></li>`)
     .join('')}</ul></nav>
   <div class="menu__foot">
     ${book(ctx, c.header.book, 'btn--yellow btn--lg')}
@@ -49,14 +53,18 @@ export function header(ctx) {
 </div>`;
 }
 
+const FLAG_US = '<svg class="flag" viewBox="0 0 28 20" aria-hidden="true" focusable="false"><rect width="28" height="20" fill="#fff"/><path fill="#B22234" d="M0 0h28v1.54H0zm0 3.08h28v1.54H0zm0 3.08h28V7.7H0zm0 3.08h28v1.54H0zm0 3.08h28v1.54H0zm0 3.08h28v1.54H0zm0 3.08h28V20H0z"/><rect width="12" height="10.8" fill="#3C3B6E"/><g fill="#fff"><circle cx="2" cy="2" r=".7"/><circle cx="6" cy="2" r=".7"/><circle cx="10" cy="2" r=".7"/><circle cx="4" cy="5.4" r=".7"/><circle cx="8" cy="5.4" r=".7"/><circle cx="2" cy="8.8" r=".7"/><circle cx="6" cy="8.8" r=".7"/><circle cx="10" cy="8.8" r=".7"/></g></svg>';
+const FLAG_ES = '<svg class="flag" viewBox="0 0 28 20" aria-hidden="true" focusable="false"><rect width="28" height="20" fill="#AA151B"/><rect y="5" width="28" height="10" fill="#F1BF00"/></svg>';
+
 function langSwitch(ctx) {
   const { c, lang } = ctx;
   const en = lang === 'en';
   const href = en ? 'es/index.html' : '../index.html';
+  const on = (code, flag, name) => `<span class="lang__on" aria-current="true" lang="${code}">${flag}<span class="sr">${name}</span></span>`;
+  const link = (code, flag, name) => `<a href="${href}" lang="${code}" hreflang="${code}" data-lang="${code}" title="${esc(c.langSwitchTitle)}">${flag}<span class="sr">${name}</span></a>`;
   return `<div class="lang" role="group" aria-label="${esc(c.langLabel)}">
-  ${en ? '<span class="lang__on" aria-current="true" lang="en">EN</span>' : `<a href="${href}" lang="en" hreflang="en" data-lang="en" title="${esc(c.langSwitchTitle)}">EN</a>`}
-  <span aria-hidden="true">|</span>
-  ${en ? `<a href="${href}" lang="es" hreflang="es" data-lang="es" title="${esc(c.langSwitchTitle)}">ES</a>` : '<span class="lang__on" aria-current="true" lang="es">ES</span>'}
+  ${en ? on('en', FLAG_US, 'English') : link('en', FLAG_US, 'English')}
+  ${en ? link('es', FLAG_ES, 'Español') : on('es', FLAG_ES, 'Español')}
 </div>`;
 }
 
@@ -275,9 +283,9 @@ export function kids(ctx) {
     <div class="coloring">
       ${mascot(ctx, 'coloring__chomp')}
       <div>
-        <h3 class="h3">${esc(k.chompers.title)}</h3>
+        <h3 class="h3 coloring__title">${esc(k.chompers.title)}</h3>
         <p>${esc(k.chompers.text)}</p>
-        <p class="coloring__meta"><b>${esc(k.chompers.book)}</b> · ${esc(k.chompers.meta)}</p>
+        <ul class="coloring__chips" aria-label="${esc(k.chompers.book)}"><li class="is-book">${esc(k.chompers.book)}</li>${k.chompers.meta.split(' · ').map((m) => `<li>${esc(m)}</li>`).join('')}</ul>
         <a class="btn btn--yellow" href="${ctx.P}assets/docs/chompers_gets_braces.pdf" download>${icon('dl')}<span>${esc(k.chompers.cta)}</span></a>
       </div>
     </div>
@@ -300,8 +308,8 @@ export function gallery(ctx) {
   const cases = Array.from({ length: n }, (_, i) => {
     const k = i + 1;
     return `<div class="cmp cmp--gal" data-cmp style="--p:50" id="case-${k}"${i ? ' hidden' : ''}>
-  <div class="cmp__layer">${img(ctx, { file: `gallery-${pad(k)}-before.webp`, w: 1200, h: 900, alt: c.alt.gallery(k, 'before'), art: toothRowArt('before', k), cls: 'is-before', sizes: '(min-width: 900px) 60vw, 95vw' })}</div>
-  <div class="cmp__layer cmp__top">${img(ctx, { file: `gallery-${pad(k)}-after.webp`, w: 1200, h: 900, alt: c.alt.gallery(k, 'after'), art: toothRowArt('after', k), cls: 'is-after', sizes: '(min-width: 900px) 60vw, 95vw' })}</div>
+  <div class="cmp__layer">${img(ctx, { file: `${k}-antes.jpg.webp`, w: 700, h: 700, alt: c.alt.gallery(k, 'before'), art: toothRowArt('before', k), cls: 'is-before', sizes: '(min-width: 900px) 60vw, 95vw' })}</div>
+  <div class="cmp__layer cmp__top">${img(ctx, { file: `${k}-depois-1.jpg.webp`, w: 700, h: 700, alt: c.alt.gallery(k, 'after'), art: toothRowArt('after', k), cls: 'is-after', sizes: '(min-width: 900px) 60vw, 95vw' })}</div>
   <span class="cmp__tag cmp__tag--l">${esc(g.before)}</span><span class="cmp__tag cmp__tag--r">${esc(g.after)}</span>
   <span class="cmp__handle" aria-hidden="true"><span class="cmp__knob">${icon('drag')}</span></span>
   <input class="cmp__range" type="range" min="0" max="100" value="50" aria-label="${esc(g.sliderLabel)} ${k}">
@@ -493,6 +501,6 @@ export function footer(ctx) {
       <li><a href="${PRIVACY_URL}">${esc(f.privacy)}</a></li>
     </ul></div>
   </div>
-  <div class="wrap ftr__copy"><p>${esc(f.copy)}</p></div>
+  <div class="wrap ftr__copy">${wire('ftr__wire')}<p class="ftr__smile">${esc(f.smile)}</p><p class="ftr__fine">${esc(f.copy)}</p></div>
 </footer>`;
 }
