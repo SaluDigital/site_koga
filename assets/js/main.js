@@ -513,6 +513,12 @@
   headerCompact();
   menu();
   chapters();
+  // #top points at the fixed header, which never scrolls into view: scroll the page itself
+  $$('a[href="#top"]').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    history.replaceState(null, '', location.pathname + location.search);
+  }));
   language();
   trust();
   about();
