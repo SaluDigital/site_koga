@@ -22,7 +22,7 @@ export const logo = (ctx, white = false) =>
 /* ------------------------------------------------------------------ */
 const KIDS_URL = 'https://kogaortho.com/kids-orthodontics/';
 const BLOG_URL = 'https://kogaortho.com/blog/';
-const navHref = (k) => (k === 'kids' ? KIDS_URL : k === 'blog' ? BLOG_URL : k === 'home' ? '#top' : `#${k}`);
+const navHref = (k) => (k === 'kids' ? KIDS_URL : k === 'blog' ? BLOG_URL : k === 'home' ? '#home' : `#${k}`);
 
 export function header(ctx) {
   const { c } = ctx;
@@ -86,7 +86,7 @@ export function hero(ctx) {
   const word = (w, i) => `<span class="w"><span style="--i:${i}">${esc(w)}</span></span>`;
   const l1 = h.line1.map((w, i) => word(w, i + 1)).join(' ');
   const l2 = h.line2.map((w, i) => word(w, i + 3)).join(' ');
-  return `<section class="hero" aria-labelledby="hero-title">
+  return `<section id="home" class="hero" aria-labelledby="hero-title">
   <picture class="hero__pic ph" data-ph="hero.webp 1920×1080 · hero-mobile.webp 900×1200" style="--ar:16/9">
     <source media="(max-width: 700px)" srcset="${P}assets/img/hero-mobile.webp" width="900" height="1200">
     <img src="${P}assets/img/hero.webp" width="1920" height="1080" alt="${esc(c.alt.hero)}" fetchpriority="high" decoding="async" onerror="kfMissing(this)">
