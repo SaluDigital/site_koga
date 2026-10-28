@@ -21,7 +21,7 @@ export default {
   langLabel: 'Language',
   langSwitchTo: 'Español',
   langSwitchTitle: 'Ver esta página en español',
-  nav: { about: 'About', services: 'Services', smiles: 'Smiles', kids: 'Kids', locations: 'Locations', faq: 'FAQ', blog: 'Blog' },
+  nav: { home: 'Home', about: 'About', services: 'Services', smiles: 'Smiles', kids: 'Kids', locations: 'Locations', faq: 'FAQ', blog: 'Blog' },
   progressLabel: 'Page progress',
   logoLabel: 'Koga Orthodontics, home',
   tagline: 'Your smile. Our passion.',

@@ -22,7 +22,7 @@ export const logo = (ctx, white = false) =>
 /* ------------------------------------------------------------------ */
 const KIDS_URL = 'https://kogaortho.com/kids-orthodontics/';
 const BLOG_URL = 'https://kogaortho.com/blog/';
-const navHref = (k) => (k === 'kids' ? KIDS_URL : k === 'blog' ? BLOG_URL : `#${k}`);
+const navHref = (k) => (k === 'kids' ? KIDS_URL : k === 'blog' ? BLOG_URL : k === 'home' ? '#top' : `#${k}`);
 
 export function header(ctx) {
   const { c } = ctx;
